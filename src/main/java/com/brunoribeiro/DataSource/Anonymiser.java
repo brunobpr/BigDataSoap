@@ -37,8 +37,8 @@ public class Anonymiser {
             e.printStackTrace();
         }
         for(String word : words){
-            if(namesList.contains(word.replace(",", ""))){
-               word = word.replaceAll(".", "*");
+            if(namesList.contains(word.replaceAll("[,.!?]+", ""))){    
+               word = word.replaceAll("[A-Za-z]", "*");
             }
             anonymousText += " " + word;
         }
