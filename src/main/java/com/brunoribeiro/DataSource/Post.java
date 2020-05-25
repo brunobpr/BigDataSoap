@@ -23,4 +23,8 @@ public class Post {
         this.postedDate = new SimpleDateFormat("E, dd MMM yyyy").format(new Date());
     } 
 
+    public String anonymiseText() {
+        return Anonymiser.getInstance().anonymiseText(this.text);
+    }
+
 }

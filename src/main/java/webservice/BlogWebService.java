@@ -8,6 +8,7 @@ package webservice;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import com.brunoribeiro.DataSource.*;
 
 /**
  *
@@ -17,10 +18,16 @@ import javax.jws.WebParam;
 public class BlogWebService {
 
     /**
-     * This is a sample web service operation
+     * Web service operation
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    @WebMethod(operationName = "Anonymise")
+    public String Anonymise(@WebParam(name = "text") String text, @WebParam(name = "author") String author) {
+        Post post = new Post(author, text);
+        String response = post.anonymiseText();
+        return response;
     }
+
+    
+    
+    
 }
