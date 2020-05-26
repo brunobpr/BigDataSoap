@@ -12,6 +12,8 @@ import javax.xml.ws.Response;
 import com.brunoribeiro.views.HomePage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -21,7 +23,8 @@ public class Controller implements ActionListener {
 
     private BlogService blogService;
     private HomePage homePage;
-
+    private ArrayList<Post> listOfPosts = new ArrayList<Post>();
+    
     public Controller() {
         blogService = new BlogService();
         homePage = new HomePage(this);
@@ -36,7 +39,10 @@ public class Controller implements ActionListener {
                 String author = homePage.getAuthor();
                 String post = homePage.getPost();
                 String response = blogService.getResponse(author, post);
-                System.out.println(response);
+               
+                listOfPosts.add(new Post(author, response));
+                homePage.refreshPage(listOfPosts);
+                
         }
     }
 }
