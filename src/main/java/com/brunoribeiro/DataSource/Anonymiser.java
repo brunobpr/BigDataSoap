@@ -25,18 +25,19 @@ public class Anonymiser {
         String[] words = text.split(" ");
         String anonymousText = "";
         ArrayList<String> namesList = new ArrayList<String>();
+        
         try {
             File file = new File("/Users/brunoribeiro/git/BigDataSoap/src/main/java/com/brunoribeiro/DataSource/names.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                namesList.add(scanner.nextLine());
+                namesList.add(scanner.nextLine().toUpperCase());
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         for(String word : words){
-            if(namesList.contains(word.replaceAll("[,.!?]+", ""))){    
+            if(namesList.contains(word.replaceAll("[,.!?]+", "").toUpperCase())){    
                word = word.replaceAll("[A-Za-z]", "*");
             }
             anonymousText += " " + word;
