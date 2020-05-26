@@ -27,7 +27,7 @@ public class Anonymiser {
         ArrayList<String> namesList = new ArrayList<String>();
         
         try {
-            File file = new File("/Users/brunoribeiro/git/BigDataSoap/src/main/java/com/brunoribeiro/DataSource/names.txt");
+            File file = new File("/Users/brunoribeiro/git/BigDataSoap/SoapWebService/src/main/java/com/brunoribeiro/DataSource/names.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 namesList.add(scanner.nextLine().toUpperCase());
