@@ -11,12 +11,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,7 +37,8 @@ public class HomePage extends JFrame {
     private JPanel topPanel, formPanel;
     private JTextField authorTF;
     private JTextArea postTF;
-    private JLabel lettersCounter;
+    private JLabel lettersCounter, jl;
+    private ImageIcon icon = new ImageIcon();
     private GridBagLayout grid = new GridBagLayout();
     private GridBagConstraints gbc = new GridBagConstraints();
 
@@ -83,31 +85,44 @@ public class HomePage extends JFrame {
         postLabel.setFont(font);
         button.setFont(font);
         button.addActionListener(controller);
-        
+        button.setActionCommand("post");
         authorTF = new JTextField(16);
         postTF = new JTextArea();
         postTF.setLineWrap(true);
+        postTF.setWrapStyleWord(true);
         postTF.setPreferredSize(new Dimension(195, 200));
         gbc.gridy = 0;
         gbc.gridx = 0;
         gbc.gridwidth = 3;
+        gbc.insets = new Insets(-50, 0, 20 ,0);
+        formPanel.add(jl = new JLabel(icon = new ImageIcon("./src/main/java/com/brunoribeiro/views/icon.png")), gbc);
+        gbc.gridy = 1;gbc.ipady = 0;
+         gbc.insets = new Insets(0, 0, 0 ,0);
         formPanel.add(authorLabel, gbc);
-        gbc.gridy = 1;
-
-        formPanel.add(authorTF, gbc);
         gbc.gridy = 2;
-        formPanel.add(postLabel, gbc);
+        formPanel.add(authorTF, gbc);
         gbc.gridy = 3;
-        formPanel.add(postTF, gbc);
+        formPanel.add(postLabel, gbc);
         gbc.gridy = 4;
-        gbc.gridx = 1;
+        formPanel.add(postTF, gbc);
+        gbc.gridy = 5;
+        gbc.gridx = 0;
         gbc.gridwidth = 1;
         formPanel.add(button, gbc);
-        gbc.gridy = 4;
-        gbc.gridx = 2;
+        gbc.gridy = 5;
+        gbc.gridx = 1;
         formPanel.add(lettersCounter, gbc);
         add(formPanel, BorderLayout.EAST);
         validate();
         repaint();
+    }
+    
+    
+    public String getPost(){
+         return postTF.getText().toString();
+    }
+    
+    public String getAuthor(){
+         return authorTF.getText().toString();
     }
 }
