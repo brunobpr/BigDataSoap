@@ -8,24 +8,27 @@ import com.brunoribeiro.models.BlogWebService_Service;
 import com.brunoribeiro.models.BlogWebService;
 import com.brunoribeiro.models.*;
 import javax.xml.ws.Response;
+import com.brunoribeiro.views.HomePage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author brunoribeiro
  */
-public class Controller {
+public class Controller implements ActionListener {
     private BlogService blogService;
+    private HomePage homePage;
     
     public Controller(){
         blogService = new BlogService();
-        System.out.println(blogService.getResponse("Bruno", "Bruno, This is a text, Greg."));
+        homePage = new HomePage(this);
+        String response = blogService.getResponse("Bruno", "Bruno, This is a text, Greg.");
+        System.out.println(response);
+       
     }
-    
-    
-    public void callAsyncOperation(){
-        
-        
 
-        
-    }
-    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
+    } 
 }
