@@ -37,7 +37,7 @@
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
                             </vmArgs>
-                            <wsdlLocation>http://localhost:8080/BigDataSoap/BlogWebService?WSDL</wsdlLocation>
+                            <wsdlLocation>http://localhost:8080/SoapWebService/BlogWebService?WSDL</wsdlLocation>
                             <staleFile>${project.build.directory}/jaxws/stale/BlogWebService.stale</staleFile>
                         </configuration>
                         <id>wsimport-generate-BlogWebService</id>
