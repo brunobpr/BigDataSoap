@@ -37,10 +37,12 @@ public class Anonymiser {
             e.printStackTrace();
         }
         for(String word : words){
-            if(namesList.contains(word.replaceAll("[,.!?]+", "").toUpperCase())){    
-               word = word.replaceAll("[A-Za-z]", "*");
+            for(String name : namesList){
+                if(name.equals(word.replaceAll("[,.!?]+", "").toUpperCase())){  
+                     word = word.replaceAll("[A-Za-z]", "*");
+                }
             }
-            anonymousText += " " + word;
+           anonymousText += " " + word;
         }
         return anonymousText.replaceFirst(" ", "");
     }
