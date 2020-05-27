@@ -25,9 +25,12 @@ public class Anonymiser {
         String[] words = text.split(" ");
         String anonymousText = "";
         ArrayList<String> namesList = new ArrayList<String>();
-        
         try {
-            File file = new File("/Users/brunoribeiro/git/BigDataSoap/SoapWebService/src/main/java/com/brunoribeiro/DataSource/names.txt");
+            System.out.println(this.getClass().getPackage());
+            String path = String.valueOf(this.getClass().getProtectionDomain().getCodeSource().getLocation());
+            path = path.replace("/Anonymiser.class", "/names.txt");
+            path = path.replace("file:", "");
+            File file = new File(path);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 namesList.add(scanner.nextLine().toUpperCase());
