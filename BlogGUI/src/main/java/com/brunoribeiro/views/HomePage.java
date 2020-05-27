@@ -128,7 +128,10 @@ public class HomePage extends JFrame {
     }
 
     public void refreshPage(ArrayList<Post> list) {
+        remove(mainPanel);
+        remove(jcp);
         add(mainPanel);
+        mainPanel.removeAll();
         jcp = new JScrollPane(mainPanel);
         jcp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jcp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
