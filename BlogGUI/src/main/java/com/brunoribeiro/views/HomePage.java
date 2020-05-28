@@ -43,7 +43,7 @@ public class HomePage extends JFrame {
     private JPanel mainPanel = new JPanel();
     private JTextField authorTF;
     private JTextArea postTF;
-    private JLabel charCounter, jl, errorMessage;
+    private JLabel charCounter, jl, statusMessage;
     private ImageIcon icon = new ImageIcon();
     private GridBagLayout grid = new GridBagLayout();
     private GridBagConstraints gbc = new GridBagConstraints();
@@ -85,12 +85,11 @@ public class HomePage extends JFrame {
         JButton button = new JButton("SEND");
         JLabel postLabel = new JLabel("Post");
         charCounter = new JLabel("0/240");
-        errorMessage = new JLabel("");
+        statusMessage = new JLabel("");
         font = new Font("arial", Font.BOLD, 16);
         authorLabel.setForeground(Color.white);
         postLabel.setForeground(Color.white);
         charCounter.setForeground(Color.white);
-        errorMessage.setForeground(Color.red);
         button.setForeground(new Color(0, 128, 128));
         authorLabel.setFont(font);
         postLabel.setFont(font);
@@ -128,7 +127,7 @@ public class HomePage extends JFrame {
         gbc.gridy = 6;
         gbc.gridx = 0;
         gbc.gridwidth = 3;
-        formPanel.add(errorMessage, gbc);
+        formPanel.add(statusMessage, gbc);
         add(formPanel, BorderLayout.EAST);
         validate();
         repaint();
@@ -208,7 +207,16 @@ public class HomePage extends JFrame {
     }
 
     public void setErrorMessage(String message) {
-        errorMessage.setText(message);
+        statusMessage.setForeground(Color.red);
+        statusMessage.setText(message);
+    }
+
+    public void successMessage() {
+        authorTF.setText("");
+        postTF.setText("");
+        statusMessage.setForeground(Color.white);
+        statusMessage.setText("Post was anonymised");
+        
     }
 
 }

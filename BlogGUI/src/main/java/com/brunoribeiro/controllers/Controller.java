@@ -54,6 +54,7 @@ public class Controller implements ActionListener, KeyListener {
                          homePage.setErrorMessage(response);
                     }else {
                         listOfPosts.add(new Post(author, response));
+                        homePage.successMessage();
                         homePage.refreshPage(listOfPosts);
                     }
                 }

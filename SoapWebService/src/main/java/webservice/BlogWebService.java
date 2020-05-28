@@ -12,7 +12,7 @@ import com.brunoribeiro.DataSource.*;
 
 /**
  *
- * @author brunoribeiro
+ * @author brunoribeiro - 2017138
  */
 @WebService(serviceName = "BlogWebService")
 public class BlogWebService {
