@@ -25,9 +25,5 @@ public class BlogWebService {
         Post post = new Post(author, text);
         String response = post.anonymiseText();
         return response;
-    }
-
-    
-    
-    
+    } 
 }

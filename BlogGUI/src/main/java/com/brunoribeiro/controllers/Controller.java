@@ -16,17 +16,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author brunoribeiro
  */
-public class Controller implements ActionListener, KeyListener{
+public class Controller implements ActionListener, KeyListener {
 
     private BlogService blogService;
     private HomePage homePage;
     private ArrayList<Post> listOfPosts = new ArrayList<Post>();
-    
+
     public Controller() {
         blogService = new BlogService();
         homePage = new HomePage(this);
@@ -40,34 +39,40 @@ public class Controller implements ActionListener, KeyListener{
             case "post":
                 String author = homePage.getAuthor();
                 String post = homePage.getPost();
-                if(author.isEmpty()){
+                if (author.isEmpty()) {
                     homePage.setErrorMessage("Please, enter your name!");
-                }else if(post.isEmpty()){
-                     homePage.setErrorMessage("Please, write your post!");
-                }else if(post.length() > 240){
-                     homePage.setErrorMessage("Sorry, text is too long!");
-                }else{
-                String response = blogService.getResponse(author, post);       
-                listOfPosts.add(new Post(author, response));
-                homePage.refreshPage(listOfPosts);
+                } else if (post.isEmpty()) {
+                    homePage.setErrorMessage("Please, write your post!");
+                } else if (post.length() > 240) {
+                    homePage.setErrorMessage("Sorry, text is too long!");
+                } else {
+                    homePage.setErrorMessage("");
+                    String response = blogService.getResponse(author, post);
+                    if (response.contains("Connection refused (Connection refused).")) {
+                        homePage.setErrorMessage("SoapWebService is not running!");
+                    } else if(response.contains(":(")){
+                         homePage.setErrorMessage(response);
+                    }else {
+                        listOfPosts.add(new Post(author, response));
+                        homePage.refreshPage(listOfPosts);
+                    }
                 }
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-       
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-      int counter = homePage.getCharCounter();
+        int counter = homePage.getCharCounter();
         homePage.setCharCounterText(counter);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-         int counter = homePage.getCharCounter();
+        int counter = homePage.getCharCounter();
         homePage.setCharCounterText(counter);
     }
 }

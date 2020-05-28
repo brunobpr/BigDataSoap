@@ -32,13 +32,7 @@ public class BlogService {
             javax.xml.ws.AsyncHandler<com.brunoribeiro.models.AnonymiseResponse> asyncHandler = new javax.xml.ws.AsyncHandler<com.brunoribeiro.models.AnonymiseResponse>() {
                 public void handleResponse(javax.xml.ws.Response<com.brunoribeiro.models.AnonymiseResponse> response) {
                     try {
-                        // TODO process asynchronous response here
-                        if(!response.get().getReturn().equals(text)){
-                            responseMessage = response.get().getReturn() ;
-                        }else{
-                            responseMessage = "Text could not be anonymised!";
-                        }
-                      
+                        responseMessage = response.get().getReturn() ;
                     } catch(Exception ex) {
                         responseMessage = ex.getMessage();
                     }

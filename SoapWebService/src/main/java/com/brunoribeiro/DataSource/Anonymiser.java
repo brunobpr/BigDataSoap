@@ -26,7 +26,6 @@ public class Anonymiser {
         String anonymousText = "";
         ArrayList<String> namesList = new ArrayList<String>();
         try {
-            System.out.println(this.getClass().getPackage());
             String path = String.valueOf(this.getClass().getProtectionDomain().getCodeSource().getLocation());
             path = path.replace("/Anonymiser.class", "/names.txt");
             path = path.replace("file:", "");
@@ -37,7 +36,7 @@ public class Anonymiser {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return "404 - Names.txt not found :(";
         }
         for(String word : words){
             for(String name : namesList){

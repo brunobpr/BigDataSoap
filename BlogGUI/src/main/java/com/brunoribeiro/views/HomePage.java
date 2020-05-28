@@ -87,7 +87,6 @@ public class HomePage extends JFrame {
         charCounter = new JLabel("0/240");
         errorMessage = new JLabel("");
         font = new Font("arial", Font.BOLD, 16);
-        
         authorLabel.setForeground(Color.white);
         postLabel.setForeground(Color.white);
         charCounter.setForeground(Color.white);
@@ -144,8 +143,8 @@ public class HomePage extends JFrame {
         jcp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jcp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(jcp);
-        mainPanel.setLayout(new GridLayout(6, 1));
-        for(Post p : list) {
+        mainPanel.setLayout(new GridLayout(list.size() + 1, 1));
+        for (Post p : list) {
             JPanel panel = new JPanel();
             panel.setLayout(grid);
             panel.setBackground(Color.white);
@@ -162,8 +161,7 @@ public class HomePage extends JFrame {
             gbc.gridy = 0;
             gbc.gridx = 0;
             gbc.gridwidth = 1;
-            
-            panel.add(jl = new JLabel(icon= new ImageIcon("./src/main/java/com/brunoribeiro/views/user.png")), gbc);
+            panel.add(jl = new JLabel(icon = new ImageIcon("./src/main/java/com/brunoribeiro/views/user.png")), gbc);
             gbc.gridy = 1;
             panel.add(author, gbc);
             gbc.gridy = 2;
@@ -172,7 +170,6 @@ public class HomePage extends JFrame {
             gbc.gridx = 1;
             gbc.gridheight = 6;
             gbc.gridwidth = 4;
-
             panel.add(text, gbc);
             panel.setPreferredSize(new Dimension(600, 150));
             mainPanel.add(panel);
@@ -180,7 +177,7 @@ public class HomePage extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 7;
             gbc.gridwidth = 5;
-            JPanel line = new JPanel(); 
+            JPanel line = new JPanel();
             line.setPreferredSize(new Dimension(600, 2));
             line.setBackground(Color.black);
             panel.add(line, gbc);
@@ -196,23 +193,22 @@ public class HomePage extends JFrame {
     public String getAuthor() {
         return authorTF.getText().toString();
     }
-    
-    public int getCharCounter(){
+
+    public int getCharCounter() {
         return postTF.getText().length();
     }
 
     public void setCharCounterText(int counter) {
-         charCounter.setText(String.valueOf(counter) + "/240");
-        if(counter > 240){
-         charCounter.setForeground(Color.red);
-       }else{
-          charCounter.setForeground(Color.white);
+        charCounter.setText(String.valueOf(counter) + "/240");
+        if (counter > 240) {
+            charCounter.setForeground(Color.red);
+        } else {
+            charCounter.setForeground(Color.white);
         }
     }
-    
-    public void setErrorMessage(String message){
+
+    public void setErrorMessage(String message) {
         errorMessage.setText(message);
     }
-    
-    
+
 }
