@@ -12,6 +12,8 @@ import javax.xml.ws.Response;
 import com.brunoribeiro.views.HomePage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author brunoribeiro
  */
-public class Controller implements ActionListener {
+public class Controller implements ActionListener, KeyListener{
 
     private BlogService blogService;
     private HomePage homePage;
@@ -44,5 +46,22 @@ public class Controller implements ActionListener {
                 homePage.refreshPage(listOfPosts);
                 
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+       
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+      int counter = homePage.getCharCounter();
+        homePage.setCharCounterText(counter);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+         int counter = homePage.getCharCounter();
+        homePage.setCharCounterText(counter);
     }
 }
