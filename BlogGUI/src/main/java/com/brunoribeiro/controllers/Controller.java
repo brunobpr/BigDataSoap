@@ -40,11 +40,17 @@ public class Controller implements ActionListener, KeyListener{
             case "post":
                 String author = homePage.getAuthor();
                 String post = homePage.getPost();
-                String response = blogService.getResponse(author, post);
-               
+                if(author.isEmpty()){
+                    homePage.setErrorMessage("Please, enter your name!");
+                }else if(post.isEmpty()){
+                     homePage.setErrorMessage("Please, write your post!");
+                }else if(post.length() > 240){
+                     homePage.setErrorMessage("Sorry, text is too long!");
+                }else{
+                String response = blogService.getResponse(author, post);       
                 listOfPosts.add(new Post(author, response));
                 homePage.refreshPage(listOfPosts);
-                
+                }
         }
     }
 

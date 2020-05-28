@@ -43,7 +43,7 @@ public class HomePage extends JFrame {
     private JPanel mainPanel = new JPanel();
     private JTextField authorTF;
     private JTextArea postTF;
-    private JLabel charCounter, jl;
+    private JLabel charCounter, jl, errorMessage;
     private ImageIcon icon = new ImageIcon();
     private GridBagLayout grid = new GridBagLayout();
     private GridBagConstraints gbc = new GridBagConstraints();
@@ -84,11 +84,14 @@ public class HomePage extends JFrame {
         JLabel authorLabel = new JLabel("Name");
         JButton button = new JButton("SEND");
         JLabel postLabel = new JLabel("Post");
-        charCounter = new JLabel("240/240");
+        charCounter = new JLabel("0/240");
+        errorMessage = new JLabel("");
         font = new Font("arial", Font.BOLD, 16);
+        
         authorLabel.setForeground(Color.white);
         postLabel.setForeground(Color.white);
         charCounter.setForeground(Color.white);
+        errorMessage.setForeground(Color.red);
         button.setForeground(new Color(0, 128, 128));
         authorLabel.setFont(font);
         postLabel.setFont(font);
@@ -123,6 +126,10 @@ public class HomePage extends JFrame {
         gbc.gridy = 5;
         gbc.gridx = 1;
         formPanel.add(charCounter, gbc);
+        gbc.gridy = 6;
+        gbc.gridx = 0;
+        gbc.gridwidth = 3;
+        formPanel.add(errorMessage, gbc);
         add(formPanel, BorderLayout.EAST);
         validate();
         repaint();
@@ -155,7 +162,7 @@ public class HomePage extends JFrame {
             gbc.gridy = 0;
             gbc.gridx = 0;
             gbc.gridwidth = 1;
-           
+            
             panel.add(jl = new JLabel(icon= new ImageIcon("./src/main/java/com/brunoribeiro/views/user.png")), gbc);
             gbc.gridy = 1;
             panel.add(author, gbc);
@@ -201,6 +208,10 @@ public class HomePage extends JFrame {
        }else{
           charCounter.setForeground(Color.white);
         }
+    }
+    
+    public void setErrorMessage(String message){
+        errorMessage.setText(message);
     }
     
     
