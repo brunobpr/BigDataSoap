@@ -141,8 +141,9 @@ public class HomePage extends JFrame {
         jcp = new JScrollPane(mainPanel);
         jcp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jcp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+      
         add(jcp);
-        mainPanel.setLayout(new GridLayout(list.size() + 1, 1));
+        mainPanel.setLayout(new GridLayout(list.size() + 6, 1));
         for (Post p : list) {
             JPanel panel = new JPanel();
             panel.setLayout(grid);
@@ -151,31 +152,30 @@ public class HomePage extends JFrame {
             author.setFont(font);
             JLabel date = new JLabel(p.getPostedDate());
             date.setFont(new Font("arial", Font.PLAIN, 10));
-            JTextArea text = new JTextArea(p.getText());
+            JTextArea text = new JTextArea(p.getText(), (p.getText().length()/40), 40);
             text.setLineWrap(true);
             text.setWrapStyleWord(true);
-            text.setPreferredSize(new Dimension(475, 130));
             text.setEditable(false);
             text.setBackground(Color.white);
+           // text.setPreferredSize(new Dimension(550, p.getText().length() + 20));
             gbc.gridy = 0;
             gbc.gridx = 0;
             gbc.gridwidth = 1;
+            gbc.insets = new Insets(20, 0, 0, 0);
+            panel.setBackground(Color.white);
             panel.add(jl = new JLabel(icon = new ImageIcon("./src/main/java/com/brunoribeiro/views/user.png")), gbc);
             gbc.gridy = 1;
+            gbc.insets = new Insets(0, 0, 0, 0);
             panel.add(author, gbc);
             gbc.gridy = 2;
             panel.add(date, gbc);
-            gbc.gridy = 0;
-            gbc.gridx = 1;
-            gbc.gridheight = 6;
-            gbc.gridwidth = 4;
+            gbc.gridy = 3;
+            gbc.insets = new Insets(10, 0, 0, 20);
             panel.add(text, gbc);
-            panel.setPreferredSize(new Dimension(600, 150));
+            gbc.insets = new Insets(0, 0, 0, 0);
             mainPanel.add(panel);
-            gbc.gridheight = 1;
-            gbc.gridx = 0;
-            gbc.gridy = 7;
-            gbc.gridwidth = 5;
+            gbc.gridy = 4;
+          //  panel.setPreferredSize(new Dimension(400, p.getText().length() + 100));
             JPanel line = new JPanel();
             line.setPreferredSize(new Dimension(600, 2));
             line.setBackground(Color.black);
@@ -186,7 +186,7 @@ public class HomePage extends JFrame {
     }
 
     public String getPost() {
-        return postTF.getText().toString();
+        return postTF.getText().replace("\n", " • ");
     }
 
     public String getAuthor() {
