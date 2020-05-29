@@ -47,12 +47,13 @@ public class Anonymiser {
             }
             scanner.close();
             //If the author's name isn't on the list, it must be added.
-           //System.out.println(author);
             if(!namesList.contains(author.toUpperCase())){ 
               BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+              //Create a new line and append the name to the names.txt file
               writer.newLine();
               writer.append(author);
               writer.close();
+              //Also, add it to the array list of names
               namesList.add(author.toUpperCase());
             }
         } catch (FileNotFoundException e) {

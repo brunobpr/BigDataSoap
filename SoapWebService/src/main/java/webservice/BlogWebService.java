@@ -18,7 +18,11 @@ import com.brunoribeiro.DataSource.*;
 public class BlogWebService {
 
     /**
+     * 
      * Web service operation
+     * This operation is responsible to get the text and author parameters from the request
+     * Create a new Post object, anonymise the text and possibly add the author's name to the list of names
+     * The response is the anonymised text or an error message
      */
     @WebMethod(operationName = "Anonymise")
     public String Anonymise(@WebParam(name = "text") String text, @WebParam(name = "author") String author) {

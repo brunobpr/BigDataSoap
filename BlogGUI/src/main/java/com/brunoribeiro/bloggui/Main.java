@@ -9,6 +9,9 @@ import com.brunoribeiro.controllers.Controller;
 /**
  *
  * @author brunoribeiro
+ * This is Client GUI Application built in Java
+ * The drag-and-drop elements from Netbeans wasn't working properly so the GUI needed to be hard-coded
+ * Make sure the server is running, otherwise the app won't work as expected
  */
 public class Main {
 

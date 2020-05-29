@@ -17,9 +17,12 @@ public class Post {
     private String text;
     private String postedDate;
     
+    //Author is the name of the author who published the post
+    //Text is the message which is being posted
     public Post(String author, String text){
         this.author = author;
         this.text = text;
+         //Current date in format Mon, 20 May 2020.
         this.postedDate = new SimpleDateFormat("E, dd MMM yyyy").format(new Date());
     } 
 
@@ -34,7 +37,4 @@ public class Post {
     public String getPostedDate() {
         return postedDate;
     }
-    
-    
-    
 }

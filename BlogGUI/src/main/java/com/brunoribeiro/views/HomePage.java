@@ -32,6 +32,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 /**
+ * This is the whole GUI for the Blog APP
  *
  * @author brunoribeiro
  */
@@ -61,7 +62,7 @@ public class HomePage extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setTitle("FaceBlog");
-        //PANEL WITH A BANNER ON THE TOP OF THE SCREEN
+        //PANEL WITH A LOGO ON THE TOP OF THE SCREEN
         topPanel = new JPanel();
         topPanel.setBackground(new Color(0, 128, 128));
         JLabel banner = new JLabel("FaceBlog");
@@ -75,12 +76,14 @@ public class HomePage extends JFrame {
         repaint();
     }
 
+    //THIS IS THE FORM ON THE RIGHT HAND SIDE OF THE SCREEN
     public void buildForm() {
         formPanel = new JPanel();
         add(formPanel, BorderLayout.EAST);
         formPanel.setMaximumSize(new Dimension(200, 600));
         formPanel.setBackground(new Color(0, 128, 128));
         formPanel.setLayout(grid);
+        //labels and buttons
         JLabel authorLabel = new JLabel("Name");
         JButton button = new JButton("SEND");
         JLabel postLabel = new JLabel("Post");
@@ -102,48 +105,61 @@ public class HomePage extends JFrame {
         postTF.setWrapStyleWord(true);
         postTF.setPreferredSize(new Dimension(195, 200));
         postTF.addKeyListener(controller);
+
+        //Positioning the elements using GridBag Constraints (gbc) 
+        //The position is determined by the value of x and y axes
+        //This is the big icon on top of the form
         gbc.gridy = 0;
         gbc.gridx = 0;
         gbc.gridwidth = 3;
         gbc.insets = new Insets(-50, 0, 20, 0);
         formPanel.add(jl = new JLabel(icon = new ImageIcon("./src/main/java/com/brunoribeiro/views/icon.png")), gbc);
+        //JLabel : Author
         gbc.gridy = 1;
         gbc.ipady = 0;
         gbc.insets = new Insets(0, 0, 0, 0);
         formPanel.add(authorLabel, gbc);
+        //TextField for Author
         gbc.gridy = 2;
         formPanel.add(authorTF, gbc);
+        //JLabel : Post
         gbc.gridy = 3;
         formPanel.add(postLabel, gbc);
+        //TextField for Post
         gbc.gridy = 4;
         formPanel.add(postTF, gbc);
-        gbc.gridy = 5;
-        gbc.gridx = 0;
-        gbc.gridwidth = 1;
+        //The button SENT
+        gbc.gridy = 5;gbc.gridx = 0; gbc.gridwidth = 1;
         formPanel.add(button, gbc);
-        gbc.gridy = 5;
+        //JLabel : 240/240 for the characters counter (dynamic)
         gbc.gridx = 1;
         formPanel.add(charCounter, gbc);
-        gbc.gridy = 6;
-        gbc.gridx = 0;
-        gbc.gridwidth = 3;
+        //JLabel for Error or Success messages (dynamic)
+        gbc.gridy = 6;gbc.gridx = 0; gbc.gridwidth = 3;
         formPanel.add(statusMessage, gbc);
+
+        //Adding the form to the the frame
         add(formPanel, BorderLayout.EAST);
         validate();
         repaint();
     }
 
     public void refreshPage(ArrayList<Post> list) {
+        //Cleaning the previous "screen"
         remove(mainPanel);
         remove(jcp);
         add(mainPanel);
         mainPanel.removeAll();
+        //JScrollPane policies
         jcp = new JScrollPane(mainPanel);
         jcp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jcp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-      
         add(jcp);
+
+        //The mainPanel is a Grid Layout of the number of posts by 1. 
+        //The extra 6 was used to avoid the first element fill the whole panel
         mainPanel.setLayout(new GridLayout(list.size() + 6, 1));
+        //For each post of the list a new Panel will be created and added to the MainPanel
         for (Post p : list) {
             JPanel panel = new JPanel();
             panel.setLayout(grid);
@@ -152,71 +168,89 @@ public class HomePage extends JFrame {
             author.setFont(font);
             JLabel date = new JLabel(p.getPostedDate());
             date.setFont(new Font("arial", Font.PLAIN, 10));
-            JTextArea text = new JTextArea(p.getText(), (p.getText().length()/40), 40);
+
+            //Using a non-editable JTextArea to display the posts
+            //This way the posts will be displayed in multiple lines
+            //The size of the area is determined by the number of rows and columns
+            JTextArea text = new JTextArea(p.getText(), (p.getText().length() / 40), 40);
             text.setLineWrap(true);
             text.setWrapStyleWord(true);
             text.setEditable(false);
             text.setBackground(Color.white);
-           // text.setPreferredSize(new Dimension(550, p.getText().length() + 20));
-            gbc.gridy = 0;
-            gbc.gridx = 0;
-            gbc.gridwidth = 1;
-            gbc.insets = new Insets(20, 0, 0, 0);
-            panel.setBackground(Color.white);
+
+            //Positioning the elements using GridBag Constraints (gbc) 
+            
+            //This is the 'user' icon on top of each post
+            gbc.gridy = 0;gbc.gridx = 0;gbc.gridwidth = 1;gbc.insets = new Insets(20, 0, 0, 0);
             panel.add(jl = new JLabel(icon = new ImageIcon("./src/main/java/com/brunoribeiro/views/user.png")), gbc);
+            //The name of the author
             gbc.gridy = 1;
             gbc.insets = new Insets(0, 0, 0, 0);
             panel.add(author, gbc);
+            //The posted date
             gbc.gridy = 2;
             panel.add(date, gbc);
-            gbc.gridy = 3;
-            gbc.insets = new Insets(10, 0, 0, 20);
+            //The JTextArea with the content of the post
+            gbc.gridy = 3;gbc.insets = new Insets(10, 0, 10, 0);
             panel.add(text, gbc);
-            gbc.insets = new Insets(0, 0, 0, 0);
-            mainPanel.add(panel);
-            gbc.gridy = 4;
-          //  panel.setPreferredSize(new Dimension(400, p.getText().length() + 100));
+
+            //This is just a line to divide each post
             JPanel line = new JPanel();
             line.setPreferredSize(new Dimension(600, 2));
-            line.setBackground(Color.black);
+            line.setBackground(new Color(0, 128, 128));
+            gbc.insets = new Insets(0, 0, 0, 0);
+            gbc.gridy = 4;
             panel.add(line, gbc);
+
+            //Adding the post to the ScrollPane
+            mainPanel.add(panel);
         }
         validate();
         repaint();
     }
 
+    //Returns the text inse of the TextField without new lines
     public String getPost() {
+        //New lines are converted to dots, this way users won't messed up the GUI
         return postTF.getText().replace("\n", " • ");
     }
 
+    //Returns the name of the author
     public String getAuthor() {
         return authorTF.getText().toString();
     }
 
+    //Returns the number of chars inside of the TextField postTF
     public int getCharCounter() {
         return postTF.getText().length();
     }
 
+    //Receive the number of charactes and update the label
     public void setCharCounterText(int counter) {
         charCounter.setText(String.valueOf(counter) + "/240");
         if (counter > 240) {
+            //If the limit of 240 is met, show the label in red
             charCounter.setForeground(Color.red);
         } else {
+            //If less than 240, leave the label white
             charCounter.setForeground(Color.white);
         }
     }
 
+    //Receives an error messege from the controller class
+    //Erros include empty inputs and problems with the response
     public void setErrorMessage(String message) {
         statusMessage.setForeground(Color.red);
         statusMessage.setText(message);
     }
 
+    //If the post is published fine
+    //Clear the input fields, reset the charCounter and display a success message
     public void successMessage() {
         authorTF.setText("");
         postTF.setText("");
+        charCounter.setText("0/240");
         statusMessage.setForeground(Color.white);
-        statusMessage.setText("Post was anonymised");
-        
+        statusMessage.setText("Post was anonymised!");
     }
-
 }
