@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -33,13 +34,8 @@ public class Anonymiser {
         ArrayList<String> namesList = new ArrayList<String>(); //ArrayList that holds the names in the file
         try {
             //This is a trick to get the correct path from the names.txt file no matter where the project is stored
-            //Because it's stored inside of the same folder of the Anonymiser.class, it is possible to get the path
-            String path = String.valueOf(this.getClass().getProtectionDomain().getCodeSource().getLocation());
-            //And replace the file name and type
-            path = path.replace("/Anonymiser.class", "/names.txt");
-            //And define the absolute file path
-            path = path.replace("file:", "");
-            File file = new File(path); //Accessing the /something/../../names.txt file
+            URL path = getClass().getResource("names.txt");
+            File file = new File(path.getPath()); //Accessing the names.txt file
             Scanner scanner = new Scanner(file);//Reading the file that holds the names
             while (scanner.hasNextLine()) {
                 //For each line, convert to uppercase and add it to the list
